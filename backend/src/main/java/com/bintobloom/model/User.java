@@ -1,16 +1,11 @@
 package com.bintobloom.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.List; // Import List
 
 @Entity
 @Table(name = "users")
@@ -18,55 +13,61 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String username;
 
-    @Email
-    @NotBlank
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String email;
 
-    @NotBlank
+    @Column(nullable = false)
     private String password;
 
-    @NotBlank
+    @Column(name = "full_name", nullable = false)
     private String fullName;
 
+    @Column(name = "phone_number")
     private String phoneNumber;
 
     private String address;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "user_type", nullable = false)
     private UserType userType;
 
     @Enumerated(EnumType.STRING)
-    private UserStatus status = UserStatus.ACTIVE;
+    @Column(nullable = false)
+    private UserStatus status;
 
-    private Integer ecoPoints = 0;
+    @Column(name = "eco_points")
+    private Integer ecoPoints;
 
-    private Double totalWasteCollected = 0.0;
+    @Column(name = "total_waste_collected")
+    private Double totalWasteCollected;
 
-    private Double totalCo2Saved = 0.0;
+    @Column(name = "total_co2_saved")
+    private Double totalCo2Saved;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Pickup> pickups;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<UserBadge> badges;
-
-    @CreationTimestamp
+    @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
-    @UpdateTimestamp
+    @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
 
+    // Relationship with Pickups where this user is the donor
+    @OneToMany(mappedBy = "donor", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Pickup> pickups; // Corrected mappedBy to "donor"
+
+    // Relationship with Pickups where this user is the collector
+    @OneToMany(mappedBy = "collector", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Pickup> collectedPickups;
+
     public enum UserType {
-        HOUSEHOLD, RESTAURANT, COLLECTOR, NGO, ADMIN
+        HOUSEHOLD, RESTAURANT, COLLECTOR, NGO
     }
 
     public enum UserStatus {

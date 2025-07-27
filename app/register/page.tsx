@@ -1,60 +1,64 @@
-"use client"
+'use client'
 
-import type React from "react"
-
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Leaf } from "lucide-react"
-import Link from "next/link"
+import type React from 'react'
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Leaf, AlertCircle, CheckCircle } from 'lucide-react'
+import Link from 'next/link'
 
 export default function RegisterPage() {
   const router = useRouter()
   const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
-    fullName: "",
-    phoneNumber: "",
-    address: "",
-    userType: "HOUSEHOLD",
+    username: '',
+    email: '',
+    password: '',
+    fullName: '',
+    phoneNumber: '',
+    address: '',
+    userType: 'HOUSEHOLD',
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [message, setMessage] = useState("")
+  const [message, setMessage] = useState('')
+  const [error, setError] = useState('')
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
-    setMessage("")
+    setMessage('')
+    setError('')
 
     try {
-      const response = await fetch("/api/auth/register", {
-        method: "POST",
+      const response = await fetch('/api/auth/register', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
       })
 
-      const data = await response.text()
+      const data = await response.json()
 
-      if (response.ok) {
-        setMessage("Registration successful! Redirecting to login...")
+      if (data.success) {
+        setMessage('Registration successful! Redirecting to login...')
         setTimeout(() => {
-          router.push("/login")
+          router.push('/login')
         }, 2000)
       } else {
-        setMessage(data || "Registration failed. Please try again.")
+        setError(data.message || 'Registration failed. Please try again.')
       }
     } catch (error) {
-      setMessage("An error occurred. Please try again.")
+      console.error('Registration error:', error)
+      setError('An error occurred. Please try again.')
     } finally {
       setIsSubmitting(false)
     }
   }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -73,7 +77,9 @@ export default function RegisterPage() {
             <div className="bg-green-100 p-2 rounded-full shadow-md">
               <Leaf className="h-5 w-5 text-green-600" />
             </div>
-            <span className="text-xl font-semibold text-green-600 drop-shadow-sm">BinToBloom</span>
+            <span className="text-xl font-semibold text-green-600 drop-shadow-sm">
+              BinToBloom
+            </span>
           </Link>
           <Link
             href="/login"
@@ -88,13 +94,20 @@ export default function RegisterPage() {
       <div className="flex-grow flex items-center justify-center py-8 px-4">
         <Card className="w-full max-w-md shadow-2xl hover:shadow-3xl transition-shadow duration-300 border border-gray-200">
           <CardHeader>
-            <CardTitle className="text-center text-2xl">Join BinToBloom</CardTitle>
-            <p className="text-center text-gray-600">Start making a difference today</p>
+            <CardTitle className="text-center text-2xl">
+              Join BinToBloom
+            </CardTitle>
+            <p className="text-center text-gray-600">
+              Start making a difference today
+            </p>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label htmlFor="userType" className="block text-sm font-medium mb-1">
+                <label
+                  htmlFor="userType"
+                  className="block text-sm font-medium mb-1"
+                >
                   Account Type
                 </label>
                 <select
@@ -102,7 +115,7 @@ export default function RegisterPage() {
                   name="userType"
                   value={formData.userType}
                   onChange={handleChange}
-                  className="w-full p-2 border border-gray-300 rounded-md"
+                  className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent"
                 >
                   <option value="HOUSEHOLD">Household</option>
                   <option value="RESTAURANT">Restaurant</option>
@@ -112,7 +125,10 @@ export default function RegisterPage() {
               </div>
 
               <div>
-                <label htmlFor="fullName" className="block text-sm font-medium mb-1">
+                <label
+                  htmlFor="fullName"
+                  className="block text-sm font-medium mb-1"
+                >
                   Full Name
                 </label>
                 <input
@@ -122,12 +138,15 @@ export default function RegisterPage() {
                   value={formData.fullName}
                   onChange={handleChange}
                   required
-                  className="w-full p-2 border border-gray-300 rounded-md"
+                  className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent"
                 />
               </div>
 
               <div>
-                <label htmlFor="username" className="block text-sm font-medium mb-1">
+                <label
+                  htmlFor="username"
+                  className="block text-sm font-medium mb-1"
+                >
                   Username
                 </label>
                 <input
@@ -137,12 +156,15 @@ export default function RegisterPage() {
                   value={formData.username}
                   onChange={handleChange}
                   required
-                  className="w-full p-2 border border-gray-300 rounded-md"
+                  className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent"
                 />
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-sm font-medium mb-1">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium mb-1"
+                >
                   Email
                 </label>
                 <input
@@ -152,12 +174,15 @@ export default function RegisterPage() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full p-2 border border-gray-300 rounded-md"
+                  className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent"
                 />
               </div>
 
               <div>
-                <label htmlFor="password" className="block text-sm font-medium mb-1">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium mb-1"
+                >
                   Password
                 </label>
                 <input
@@ -168,12 +193,15 @@ export default function RegisterPage() {
                   onChange={handleChange}
                   required
                   minLength={6}
-                  className="w-full p-2 border border-gray-300 rounded-md"
+                  className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent"
                 />
               </div>
 
               <div>
-                <label htmlFor="phoneNumber" className="block text-sm font-medium mb-1">
+                <label
+                  htmlFor="phoneNumber"
+                  className="block text-sm font-medium mb-1"
+                >
                   Phone Number
                 </label>
                 <input
@@ -182,12 +210,15 @@ export default function RegisterPage() {
                   name="phoneNumber"
                   value={formData.phoneNumber}
                   onChange={handleChange}
-                  className="w-full p-2 border border-gray-300 rounded-md"
+                  className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent"
                 />
               </div>
 
               <div>
-                <label htmlFor="address" className="block text-sm font-medium mb-1">
+                <label
+                  htmlFor="address"
+                  className="block text-sm font-medium mb-1"
+                >
                   Address
                 </label>
                 <input
@@ -196,7 +227,7 @@ export default function RegisterPage() {
                   name="address"
                   value={formData.address}
                   onChange={handleChange}
-                  className="w-full p-2 border border-gray-300 rounded-md"
+                  className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent"
                 />
               </div>
 
@@ -205,16 +236,20 @@ export default function RegisterPage() {
                 disabled={isSubmitting}
                 className="w-full bg-green-600 hover:bg-green-700 shadow-lg hover:shadow-xl transform hover:scale-105 hover:-translate-y-0.5 transition-all duration-200"
               >
-                {isSubmitting ? "Creating Account..." : "Create Account"}
+                {isSubmitting ? 'Creating Account...' : 'Create Account'}
               </Button>
 
               {message && (
-                <div
-                  className={`text-center text-sm ${
-                    message.includes("successful") ? "text-green-600" : "text-red-600"
-                  }`}
-                >
+                <div className="text-center text-sm text-green-600 bg-green-50 p-2 rounded flex items-center gap-2">
+                  <CheckCircle className="h-4 w-4" />
                   {message}
+                </div>
+              )}
+
+              {error && (
+                <div className="text-center text-sm text-red-600 bg-red-50 p-2 rounded flex items-center gap-2">
+                  <AlertCircle className="h-4 w-4" />
+                  {error}
                 </div>
               )}
             </form>

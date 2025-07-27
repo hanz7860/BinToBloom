@@ -1,0 +1,14 @@
+com\bintobloom\model\User.class
+com\bintobloom\model\Pickup.class
+com\bintobloom\model\User$UserType.class
+com\bintobloom\service\BadgeService$1.class
+com\bintobloom\model\User$UserStatus.class
+com\bintobloom\dto\BadgeDto.class
+com\bintobloom\model\Badge.class
+com\bintobloom\service\BadgeService.class
+com\bintobloom\model\Badge$BadgeType.class
+com\bintobloom\repository\UserBadgeRepository.class
+com\bintobloom\controller\PickupController.class
+com\bintobloom\model\UserBadge.class
+com\bintobloom\repository\BadgeRepository.class
+com\bintobloom\model\Pickup$PickupStatus.class

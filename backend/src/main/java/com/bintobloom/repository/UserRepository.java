@@ -12,16 +12,27 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
+
     Optional<User> findByUsername(String username);
-    Optional<User> findByEmail(String email);
+
     boolean existsByUsername(String username);
+
+    Optional<User> findByEmail(String email);
+
     boolean existsByEmail(String email);
-    
-    List<User> findByUserType(User.UserType userType);
-    
-    @Query("SELECT u FROM User u WHERE u.userType = 'HOUSEHOLD' OR u.userType = 'RESTAURANT' ORDER BY u.ecoPoints DESC")
+
+    List<User> findByStatus(String status);
+
+    List<User> findByEmailContaining(String infix);
+
+    List<User> findByStatusNot(String status);
+
+    List<User> findByStatusIn(List<String> statuses);
+
+    @Query("SELECT u FROM User u ORDER BY u.ecoPoints DESC, u.totalWasteCollected DESC")
     Page<User> findTopContributors(Pageable pageable);
-    
+
+    // Corrected: Explicitly define the query for active collectors
     @Query("SELECT u FROM User u WHERE u.userType = 'COLLECTOR' AND u.status = 'ACTIVE'")
     List<User> findActiveCollectors();
 }

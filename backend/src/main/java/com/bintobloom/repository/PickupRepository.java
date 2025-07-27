@@ -8,24 +8,25 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
 public interface PickupRepository extends JpaRepository<Pickup, Long> {
-    List<Pickup> findByUser(User user);
+    List<Pickup> findByDonor(User donor);
     List<Pickup> findByCollector(User collector);
     List<Pickup> findByStatus(Pickup.PickupStatus status);
     
-    Page<Pickup> findByUserOrderByScheduledDateTimeDesc(User user, Pageable pageable);
+    List<Pickup> findByDonorIdAndStatusIn(Long donorId, List<Pickup.PickupStatus> statuses);
+    
+    Page<Pickup> findByDonorOrderByScheduledDateTimeDesc(User donor, Pageable pageable);
     
     @Query("SELECT p FROM Pickup p WHERE p.status = 'SCHEDULED' AND p.scheduledDateTime BETWEEN :start AND :end")
     List<Pickup> findScheduledPickupsBetween(@Param("start") LocalDateTime start, @Param("end") LocalDateTime end);
     
-    @Query("SELECT SUM(p.actualWeight) FROM Pickup p WHERE p.user = :user AND p.status = 'COMPLETED'")
-    Double getTotalWasteCollectedByUser(@Param("user") User user);
+    @Query("SELECT SUM(p.actualWeight) FROM Pickup p WHERE p.donor = :donor AND p.status = 'COMPLETED'")
+    Double getTotalWasteCollectedByDonor(@Param("donor") User donor);
     
-    @Query("SELECT SUM(p.co2Saved) FROM Pickup p WHERE p.user = :user AND p.status = 'COMPLETED'")
-    Double getTotalCo2SavedByUser(@Param("user") User user);
+    @Query("SELECT SUM(p.co2Saved) FROM Pickup p WHERE p.donor = :donor AND p.status = 'COMPLETED'")
+    Double getTotalCo2SavedByDonor(@Param("donor") User donor);
 }

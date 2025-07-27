@@ -1,11 +1,11 @@
-"use client"
+'use client'
 
-import type React from "react"
+import type React from 'react'
 
-import { useState, useEffect, useRef } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
+import { useState, useEffect, useRef } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
 import {
   Camera,
   MapPin,
@@ -18,12 +18,12 @@ import {
   Award,
   Phone,
   Navigation,
-} from "lucide-react"
-import Link from "next/link"
-import { motion } from "framer-motion"
-import { useRouter } from "next/navigation"
-import { NotificationBell } from "@/components/notification-bell"
-import { useNotifications } from "@/components/notification-provider"
+} from 'lucide-react'
+import Link from 'next/link'
+import { motion } from 'framer-motion'
+import { useRouter } from 'next/navigation'
+import { NotificationBell } from '@/components/notification-bell'
+import { useNotifications } from '@/components/notification-provider'
 
 export default function CollectorDashboard() {
   const router = useRouter()
@@ -34,25 +34,25 @@ export default function CollectorDashboard() {
 
   const [assignedPickups, setAssignedPickups] = useState([
     {
-      id: "PU001",
-      donorName: "Sarah Miller",
-      donorPhone: "+1234567890",
-      address: "123 Green St, EcoCity",
-      scheduledTime: "2:30 PM",
-      estimatedWeight: "3.5 kg",
-      status: "assigned",
-      distance: "2.5 km",
+      id: 'PU001',
+      donorName: 'Sarah Miller',
+      donorPhone: '+1234567890',
+      address: '123 Green St, EcoCity',
+      scheduledTime: '2:30 PM',
+      estimatedWeight: '3.5 kg',
+      status: 'assigned',
+      distance: '2.5 km',
       donorRating: 4.9,
     },
     {
-      id: "PU002",
-      donorName: "Mike Rodriguez",
-      donorPhone: "+1234567891",
-      address: "456 Eco Ave, GreenTown",
-      scheduledTime: "4:00 PM",
-      estimatedWeight: "2.8 kg",
-      status: "assigned",
-      distance: "1.2 km",
+      id: 'PU002',
+      donorName: 'Mike Rodriguez',
+      donorPhone: '+1234567891',
+      address: '456 Eco Ave, GreenTown',
+      scheduledTime: '4:00 PM',
+      estimatedWeight: '2.8 kg',
+      status: 'assigned',
+      distance: '1.2 km',
       donorRating: 4.7,
     },
   ])
@@ -67,23 +67,44 @@ export default function CollectorDashboard() {
   })
 
   const [completedPickups, setCompletedPickups] = useState([
-    { id: "PU003", date: "2024-01-15", donor: "Alice Johnson", weight: "4.2 kg", earnings: "$15.50", rating: 5 },
-    { id: "PU004", date: "2024-01-14", donor: "Bob Smith", weight: "3.1 kg", earnings: "$12.25", rating: 4 },
-    { id: "PU005", date: "2024-01-13", donor: "Carol Davis", weight: "5.0 kg", earnings: "$18.00", rating: 5 },
+    {
+      id: 'PU003',
+      date: '2024-01-15',
+      donor: 'Alice Johnson',
+      weight: '4.2 kg',
+      earnings: '$15.50',
+      rating: 5,
+    },
+    {
+      id: 'PU004',
+      date: '2024-01-14',
+      donor: 'Bob Smith',
+      weight: '3.1 kg',
+      earnings: '$12.25',
+      rating: 4,
+    },
+    {
+      id: 'PU005',
+      date: '2024-01-13',
+      donor: 'Carol Davis',
+      weight: '5.0 kg',
+      earnings: '$18.00',
+      rating: 5,
+    },
   ])
 
   useEffect(() => {
-    const userData = localStorage.getItem("user")
+    const userData = localStorage.getItem('user')
     if (userData) {
       setUser(JSON.parse(userData))
     } else {
-      router.push("/login")
+      router.push('/login')
     }
   }, [router])
 
   const handleLogout = () => {
-    localStorage.removeItem("user")
-    router.push("/")
+    localStorage.removeItem('user')
+    router.push('/')
   }
 
   const handleImageCapture = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -93,10 +114,10 @@ export default function CollectorDashboard() {
       reader.onload = (e) => {
         setCapturedImage(e.target?.result as string)
         addNotification({
-          type: "success",
-          title: "Photo Captured",
-          message: "Waste collection photo captured successfully!",
-          priority: "low",
+          type: 'success',
+          title: 'Photo Captured',
+          message: 'Waste collection photo captured successfully!',
+          priority: 'low',
           icon: <Camera className="h-4 w-4" />,
         })
       }
@@ -107,10 +128,10 @@ export default function CollectorDashboard() {
   const handleUploadPhoto = () => {
     if (capturedImage) {
       addNotification({
-        type: "success",
-        title: "Photo Uploaded",
-        message: "Photo uploaded successfully! Pickup marked as completed.",
-        priority: "medium",
+        type: 'success',
+        title: 'Photo Uploaded',
+        message: 'Photo uploaded successfully! Pickup marked as completed.',
+        priority: 'medium',
         icon: <CheckCircle className="h-4 w-4" />,
       })
       setCapturedImage(null)
@@ -121,14 +142,16 @@ export default function CollectorDashboard() {
 
   const handleStartPickup = (pickupId: string) => {
     setAssignedPickups((prev) =>
-      prev.map((pickup) => (pickup.id === pickupId ? { ...pickup, status: "in_progress" } : pickup)),
+      prev.map((pickup) =>
+        pickup.id === pickupId ? { ...pickup, status: 'in_progress' } : pickup
+      )
     )
 
     addNotification({
-      type: "info",
-      title: "Pickup Started",
+      type: 'info',
+      title: 'Pickup Started',
       message: `Started pickup ${pickupId}. Donor has been notified.`,
-      priority: "medium",
+      priority: 'medium',
       icon: <Truck className="h-4 w-4" />,
     })
   }
@@ -136,10 +159,10 @@ export default function CollectorDashboard() {
   const handleCompletePickup = (pickupId: string) => {
     if (!capturedImage) {
       addNotification({
-        type: "warning",
-        title: "Photo Required",
-        message: "Please take a photo of the collected waste first!",
-        priority: "high",
+        type: 'warning',
+        title: 'Photo Required',
+        message: 'Please take a photo of the collected waste first!',
+        priority: 'high',
         icon: <Camera className="h-4 w-4" />,
       })
       return
@@ -149,14 +172,16 @@ export default function CollectorDashboard() {
     const earnings = Math.floor(Math.random() * 20) + 10 // Random earnings between $10-30
 
     addNotification({
-      type: "success",
-      title: "Pickup Completed",
+      type: 'success',
+      title: 'Pickup Completed',
       message: `Pickup ${pickupId} completed successfully! $${earnings} earned.`,
-      priority: "high",
+      priority: 'high',
       icon: <DollarSign className="h-4 w-4" />,
     })
 
-    setAssignedPickups((prev) => prev.filter((pickup) => pickup.id !== pickupId))
+    setAssignedPickups((prev) =>
+      prev.filter((pickup) => pickup.id !== pickupId)
+    )
     setCapturedImage(null)
 
     // Update stats
@@ -185,7 +210,9 @@ export default function CollectorDashboard() {
             <div className="bg-blue-100 p-2 rounded-full shadow-md">
               <Truck className="h-5 w-5 text-blue-600" />
             </div>
-            <span className="text-xl font-semibold text-blue-600">BinToBloom Collector</span>
+            <span className="text-xl font-semibold text-blue-600">
+              BinToBloom Collector
+            </span>
           </Link>
           <div className="flex items-center gap-4">
             <NotificationBell />
@@ -204,8 +231,12 @@ export default function CollectorDashboard() {
           transition={{ duration: 0.6 }}
           className="mb-8"
         >
-          <h1 className="text-3xl font-bold text-gray-800">Collector Dashboard</h1>
-          <p className="text-gray-600 mt-2">Manage your pickups and track your earnings</p>
+          <h1 className="text-3xl font-bold text-gray-800">
+            Collector Dashboard
+          </h1>
+          <p className="text-gray-600 mt-2">
+            Manage your pickups and track your earnings
+          </p>
         </motion.div>
 
         {/* Stats Cards */}
@@ -217,12 +248,18 @@ export default function CollectorDashboard() {
           >
             <Card className="shadow-xl hover:shadow-2xl transition-shadow duration-300">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Total Earnings</CardTitle>
+                <CardTitle className="text-sm font-medium">
+                  Total Earnings
+                </CardTitle>
                 <DollarSign className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">${collectorStats.totalEarnings}</div>
-                <p className="text-xs text-muted-foreground">+${collectorStats.thisWeekEarnings} this week</p>
+                <div className="text-2xl font-bold">
+                  ${collectorStats.totalEarnings}
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  +${collectorStats.thisWeekEarnings} this week
+                </p>
               </CardContent>
             </Card>
           </motion.div>
@@ -234,12 +271,18 @@ export default function CollectorDashboard() {
           >
             <Card className="shadow-xl hover:shadow-2xl transition-shadow duration-300">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Total Pickups</CardTitle>
+                <CardTitle className="text-sm font-medium">
+                  Total Pickups
+                </CardTitle>
                 <TrendingUp className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{collectorStats.totalPickups}</div>
-                <p className="text-xs text-muted-foreground">+{collectorStats.thisWeekPickups} this week</p>
+                <div className="text-2xl font-bold">
+                  {collectorStats.totalPickups}
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  +{collectorStats.thisWeekPickups} this week
+                </p>
               </CardContent>
             </Card>
           </motion.div>
@@ -251,12 +294,18 @@ export default function CollectorDashboard() {
           >
             <Card className="shadow-xl hover:shadow-2xl transition-shadow duration-300">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Average Rating</CardTitle>
+                <CardTitle className="text-sm font-medium">
+                  Average Rating
+                </CardTitle>
                 <Star className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{collectorStats.averageRating}</div>
-                <p className="text-xs text-muted-foreground">Based on {collectorStats.totalPickups} reviews</p>
+                <div className="text-2xl font-bold">
+                  {collectorStats.averageRating}
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  Based on {collectorStats.totalPickups} reviews
+                </p>
               </CardContent>
             </Card>
           </motion.div>
@@ -268,12 +317,18 @@ export default function CollectorDashboard() {
           >
             <Card className="shadow-xl hover:shadow-2xl transition-shadow duration-300">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Waste Collected</CardTitle>
+                <CardTitle className="text-sm font-medium">
+                  Waste Collected
+                </CardTitle>
                 <Award className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{collectorStats.totalWasteCollected}kg</div>
-                <p className="text-xs text-muted-foreground">Environmental impact</p>
+                <div className="text-2xl font-bold">
+                  {collectorStats.totalWasteCollected}kg
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  Environmental impact
+                </p>
               </CardContent>
             </Card>
           </motion.div>
@@ -297,7 +352,8 @@ export default function CollectorDashboard() {
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <p className="text-sm text-gray-600 mb-4">
-                    Take a photo of the collected waste to complete the pickup and receive payment.
+                    Take a photo of the collected waste to complete the pickup
+                    and receive payment.
                   </p>
 
                   <input
@@ -309,15 +365,20 @@ export default function CollectorDashboard() {
                     className="hidden"
                   />
 
-                  <Button onClick={handleUploadPhoto} className="w-full bg-blue-600 hover:bg-blue-700 mb-4">
+                  <Button
+                    onClick={handleUploadPhoto}
+                    className="w-full bg-blue-600 hover:bg-blue-700 mb-4"
+                  >
                     <Camera className="h-4 w-4 mr-2" />
-                    {capturedImage ? "Upload Photo" : "Take Photo"}
+                    {capturedImage ? 'Upload Photo' : 'Take Photo'}
                   </Button>
 
                   {capturedImage && (
                     <div className="text-center">
                       <CheckCircle className="h-8 w-8 text-green-600 mx-auto mb-2" />
-                      <p className="text-sm text-green-700">Photo captured successfully!</p>
+                      <p className="text-sm text-green-700">
+                        Photo captured successfully!
+                      </p>
                     </div>
                   )}
                 </div>
@@ -326,7 +387,7 @@ export default function CollectorDashboard() {
                   {capturedImage ? (
                     <div className="border-2 border-dashed border-gray-300 rounded-lg p-4">
                       <img
-                        src={capturedImage || "/placeholder.svg"}
+                        src={capturedImage || '/placeholder.svg'}
                         alt="Captured waste"
                         className="w-full h-48 object-cover rounded-lg"
                       />
@@ -357,7 +418,10 @@ export default function CollectorDashboard() {
             <CardContent>
               <div className="space-y-4">
                 {assignedPickups.map((pickup) => (
-                  <div key={pickup.id} className="border rounded-lg p-4 bg-white shadow-sm">
+                  <div
+                    key={pickup.id}
+                    className="border rounded-lg p-4 bg-white shadow-sm"
+                  >
                     <div className="grid md:grid-cols-3 gap-4">
                       <div>
                         <div className="flex items-center gap-3 mb-2">
@@ -365,10 +429,14 @@ export default function CollectorDashboard() {
                             {pickup.donorName[0]}
                           </div>
                           <div>
-                            <h3 className="font-semibold">{pickup.donorName}</h3>
+                            <h3 className="font-semibold">
+                              {pickup.donorName}
+                            </h3>
                             <div className="flex items-center gap-1">
                               <Star className="h-4 w-4 text-yellow-500 fill-current" />
-                              <span className="text-sm">{pickup.donorRating}</span>
+                              <span className="text-sm">
+                                {pickup.donorRating}
+                              </span>
                             </div>
                           </div>
                         </div>
@@ -390,13 +458,23 @@ export default function CollectorDashboard() {
                       </div>
 
                       <div className="flex flex-col justify-center">
-                        <p className="text-sm text-gray-600">Estimated Weight:</p>
-                        <p className="font-semibold text-lg">{pickup.estimatedWeight}</p>
+                        <p className="text-sm text-gray-600">
+                          Estimated Weight:
+                        </p>
+                        <p className="font-semibold text-lg">
+                          {pickup.estimatedWeight}
+                        </p>
                         <Badge
-                          variant={pickup.status === "in_progress" ? "default" : "secondary"}
+                          variant={
+                            pickup.status === 'in_progress'
+                              ? 'default'
+                              : 'secondary'
+                          }
                           className="w-fit mt-2"
                         >
-                          {pickup.status === "in_progress" ? "In Progress" : "Assigned"}
+                          {pickup.status === 'in_progress'
+                            ? 'In Progress'
+                            : 'Assigned'}
                         </Badge>
                       </div>
 
@@ -407,10 +485,10 @@ export default function CollectorDashboard() {
                           className="flex items-center gap-1 bg-transparent"
                           onClick={() =>
                             addNotification({
-                              type: "info",
-                              title: "Call Initiated",
+                              type: 'info',
+                              title: 'Call Initiated',
                               message: `Calling ${pickup.donorName}...`,
-                              priority: "low",
+                              priority: 'low',
                               icon: <Phone className="h-4 w-4" />,
                             })
                           }
@@ -419,7 +497,7 @@ export default function CollectorDashboard() {
                           Call Donor
                         </Button>
 
-                        {pickup.status === "assigned" ? (
+                        {pickup.status === 'assigned' ? (
                           <Button
                             size="sm"
                             onClick={() => handleStartPickup(pickup.id)}
@@ -459,7 +537,10 @@ export default function CollectorDashboard() {
             <CardContent>
               <div className="space-y-4">
                 {completedPickups.map((pickup) => (
-                  <div key={pickup.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                  <div
+                    key={pickup.id}
+                    className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
+                  >
                     <div>
                       <div className="font-medium">{pickup.donor}</div>
                       <div className="text-sm text-gray-600">
@@ -468,7 +549,9 @@ export default function CollectorDashboard() {
                     </div>
                     <div className="flex items-center gap-4">
                       <div className="text-right">
-                        <div className="font-semibold text-green-600">{pickup.earnings}</div>
+                        <div className="font-semibold text-green-600">
+                          {pickup.earnings}
+                        </div>
                         <div className="flex items-center gap-1">
                           <Star className="h-4 w-4 text-yellow-500 fill-current" />
                           <span className="text-sm">{pickup.rating}</span>

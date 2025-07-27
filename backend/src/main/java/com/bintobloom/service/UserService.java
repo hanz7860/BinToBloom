@@ -12,7 +12,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
@@ -21,6 +20,7 @@ import java.util.stream.IntStream;
 @RequiredArgsConstructor
 @Transactional
 public class UserService {
+    
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final BadgeService badgeService;
@@ -41,6 +41,10 @@ public class UserService {
         user.setPhoneNumber(registrationDto.getPhoneNumber());
         user.setAddress(registrationDto.getAddress());
         user.setUserType(registrationDto.getUserType());
+        user.setStatus(User.UserStatus.ACTIVE);
+        user.setEcoPoints(0);
+        user.setTotalWasteCollected(0.0);
+        user.setTotalCo2Saved(0.0);
 
         return userRepository.save(user);
     }
@@ -51,6 +55,10 @@ public class UserService {
 
     public Optional<User> findByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+    
+    public Optional<User> findById(Long id) {
+        return userRepository.findById(id);
     }
 
     public User updateUserImpact(Long userId, Double wasteCollected, Double co2Saved, Integer points) {
@@ -83,7 +91,7 @@ public class UserService {
                 user.getTotalWasteCollected(),
                 user.getTotalCo2Saved(),
                 user.getEcoPoints(),
-                user.getPickups().size(),
+                user.getPickups() != null ? user.getPickups().size() : 0,
                 badgeService.getUserBadges(user),
                 rank
         );
@@ -92,7 +100,7 @@ public class UserService {
     public List<LeaderboardDto> getLeaderboard(int limit) {
         Pageable pageable = PageRequest.of(0, limit);
         Page<User> topUsers = userRepository.findTopContributors(pageable);
-
+        
         return IntStream.range(0, topUsers.getContent().size())
                 .mapToObj(i -> {
                     User user = topUsers.getContent().get(i);

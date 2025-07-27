@@ -4,9 +4,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-
 import java.time.LocalDateTime;
 
 @Entity
@@ -15,46 +12,54 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Pickup {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @JoinColumn(name = "donor_id", nullable = false)
+    private User donor; // Changed from 'user' to 'donor' for clarity and consistency
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "collector_id")
     private User collector;
 
+    @Column(name = "scheduled_date_time", nullable = false)
     private LocalDateTime scheduledDateTime;
 
+    @Column(nullable = false)
     private String address;
 
+    @Column(name = "contact_number", nullable = false)
     private String contactNumber;
 
+    @Column(name = "estimated_weight")
+    private Double estimatedWeight;
+
+    @Column(name = "actual_weight")
+    private Double actualWeight;
+
+    @Column(name = "special_instructions", columnDefinition = "TEXT")
     private String specialInstructions;
 
     @Enumerated(EnumType.STRING)
-    private PickupStatus status = PickupStatus.SCHEDULED;
+    @Column(nullable = false)
+    private PickupStatus status;
 
-    private Double estimatedWeight;
-
-    private Double actualWeight;
-
-    private Double co2Saved;
-
+    @Column(name = "points_earned")
     private Integer pointsEarned;
 
-    private String notes;
+    @Column(name = "co2_saved")
+    private Double co2Saved;
 
-    @CreationTimestamp
+    @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
-    @UpdateTimestamp
+    @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
 
     public enum PickupStatus {
-        SCHEDULED, IN_PROGRESS, COMPLETED, CANCELLED
+        SCHEDULED, ASSIGNED, IN_PROGRESS, COMPLETED, CANCELLED
     }
 }
