@@ -1,5 +1,5 @@
-<<<<<<< HEAD
-# BinToBloom - Waste Management Platform
+
+# 🌱 BinToBloom : Full-Stack Sustainability Platform for Smart Waste Collection
 
 A full-stack waste management platform that connects donors with collectors to transform food waste into eco-friendly pesticides.
 
