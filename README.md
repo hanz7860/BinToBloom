@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # BinToBloom - Waste Management Platform
 
 A full-stack waste management platform that connects donors with collectors to transform food waste into eco-friendly pesticides.
@@ -231,3 +232,36 @@ You now have the complete **BinToBloom** waste management platform with:
 
 The application is production-ready with proper security, error handling, and responsive design! 🚀
 "# BinToBloom" 
+=======
+# 🌱 BinToBloom
+
+BinToBloom is a 3D-powered interactive platform designed to connect waste contributors with collectors and promote sustainable living. Built using **React**, **Three.js**, and **Zustand**.
+
+---
+
+## 🚀 Getting Started
+
+To run the project locally:
+
+# 1. Clone the repository
+```bash
+git clone https://github.com/hanz7860/BinToBloom.git
+```
+# 2. Go to the project directory
+```bash
+cd BinToBloom
+```
+# 3. Install dependencies
+```bash
+npm install
+```
+# 4. Start the development server
+```bash
+npm run dev
+```
+
+# 5. Go to localhost
+```bash
+http://localhost:3000
+```
+>>>>>>> 821ad8e3403df0274503f1568fa817ddb0fbdfa7

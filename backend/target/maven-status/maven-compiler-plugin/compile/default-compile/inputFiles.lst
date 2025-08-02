@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Users\harsh\Downloads\waste-management-platform\backend\src\main\java\com\wastemanagement\controller\AuthController.java
 C:\Users\harsh\Downloads\waste-management-platform\backend\src\main\java\com\wastemanagement\controller\PickupController.java
 C:\Users\harsh\Downloads\waste-management-platform\backend\src\main\java\com\wastemanagement\service\PickupService.java
@@ -24,3 +25,36 @@ C:\Users\harsh\Downloads\waste-management-platform\backend\src\main\java\com\was
 C:\Users\harsh\Downloads\waste-management-platform\backend\src\main\java\com\wastemanagement\repository\PickupRepository.java
 C:\Users\harsh\Downloads\waste-management-platform\backend\src\main\java\com\wastemanagement\controller\NotificationController.java
 C:\Users\harsh\Downloads\waste-management-platform\backend\src\main\java\com\wastemanagement\controller\HealthController.java
+=======
+C:\Users\harsh\Music\bin-to-bloom\backend\src\main\java\com\bintobloom\controller\DashboardController.java
+C:\Users\harsh\Music\bin-to-bloom\backend\src\main\java\com\bintobloom\repository\PickupRepository.java
+C:\Users\harsh\Music\bin-to-bloom\backend\src\main\java\com\bintobloom\service\ImpactMetricsService.java
+C:\Users\harsh\Music\bin-to-bloom\backend\src\main\java\com\bintobloom\service\PickupService.java
+C:\Users\harsh\Music\bin-to-bloom\backend\src\main\java\com\bintobloom\controller\UserController.java
+C:\Users\harsh\Music\bin-to-bloom\backend\src\main\java\com\bintobloom\controller\PickupController.java
+C:\Users\harsh\Music\bin-to-bloom\backend\src\main\java\com\bintobloom\model\Pickup.java
+C:\Users\harsh\Music\bin-to-bloom\backend\src\main\java\com\bintobloom\model\UserBadge.java
+C:\Users\harsh\Music\bin-to-bloom\backend\src\main\java\com\bintobloom\controller\AuthController.java
+C:\Users\harsh\Music\bin-to-bloom\backend\src\main\java\com\bintobloom\filter\JwtAuthenticationFilter.java
+C:\Users\harsh\Music\bin-to-bloom\backend\src\main\java\com\bintobloom\config\SecurityConfig.java
+C:\Users\harsh\Music\bin-to-bloom\backend\src\main\java\com\bintobloom\repository\ImpactMetricsRepository.java
+C:\Users\harsh\Music\bin-to-bloom\backend\src\main\java\com\bintobloom\model\ImpactMetrics.java
+C:\Users\harsh\Music\bin-to-bloom\backend\src\main\java\com\bintobloom\BinToBloomApplication.java
+C:\Users\harsh\Music\bin-to-bloom\backend\src\main\java\com\bintobloom\dto\PickupTrackingDto.java
+C:\Users\harsh\Music\bin-to-bloom\backend\src\main\java\com\bintobloom\service\BadgeService.java
+C:\Users\harsh\Music\bin-to-bloom\backend\src\main\java\com\bintobloom\dto\LoginResponseDto.java
+C:\Users\harsh\Music\bin-to-bloom\backend\src\main\java\com\bintobloom\dto\BadgeDto.java
+C:\Users\harsh\Music\bin-to-bloom\backend\src\main\java\com\bintobloom\repository\UserBadgeRepository.java
+C:\Users\harsh\Music\bin-to-bloom\backend\src\main\java\com\bintobloom\dto\PickupRequestDto.java
+C:\Users\harsh\Music\bin-to-bloom\backend\src\main\java\com\bintobloom\dto\LoginRequestDto.java
+C:\Users\harsh\Music\bin-to-bloom\backend\src\main\java\com\bintobloom\service\UserService.java
+C:\Users\harsh\Music\bin-to-bloom\backend\src\main\java\com\bintobloom\model\User.java
+C:\Users\harsh\Music\bin-to-bloom\backend\src\main\java\com\bintobloom\dto\UserRegistrationDto.java
+C:\Users\harsh\Music\bin-to-bloom\backend\src\main\java\com\bintobloom\config\JwtConfig.java
+C:\Users\harsh\Music\bin-to-bloom\backend\src\main\java\com\bintobloom\dto\LeaderboardDto.java
+C:\Users\harsh\Music\bin-to-bloom\backend\src\main\java\com\bintobloom\dto\UserImpactDto.java
+C:\Users\harsh\Music\bin-to-bloom\backend\src\main\java\com\bintobloom\model\Badge.java
+C:\Users\harsh\Music\bin-to-bloom\backend\src\main\java\com\bintobloom\repository\BadgeRepository.java
+C:\Users\harsh\Music\bin-to-bloom\backend\src\main\java\com\bintobloom\repository\UserRepository.java
+C:\Users\harsh\Music\bin-to-bloom\backend\src\main\java\com\bintobloom\controller\ImpactController.java
+>>>>>>> 821ad8e3403df0274503f1568fa817ddb0fbdfa7
