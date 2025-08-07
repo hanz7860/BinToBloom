@@ -8,6 +8,10 @@
         <version>3.2.0</version>
         <relativePath/>
     </parent>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 329ba18f900950419c16c4e849601e49a8284c83
     <groupId>com.wastemanagement</groupId>
     <artifactId>waste-management-backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
@@ -25,18 +29,70 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
+<<<<<<< HEAD
+=======
+=======
+    <groupId>com.bintobloom</groupId>
+    <artifactId>bintobloom-backend</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>bintobloom-backend</name>
+    <description>Backend for BinToBloom waste management application</description>
+
+    <properties>
+        <java.version>17</java.version>
+    </properties>
+
+    <dependencies>
+        <!-- Spring Boot Starters -->
+>>>>>>> 821ad8e3403df0274503f1568fa817ddb0fbdfa7
+>>>>>>> 329ba18f900950419c16c4e849601e49a8284c83
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+        
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        
+>>>>>>> 821ad8e3403df0274503f1568fa817ddb0fbdfa7
+>>>>>>> 329ba18f900950419c16c4e849601e49a8284c83
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+        
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <!-- Database -->
+        <!-- <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>runtime</scope>
+        </dependency> -->
+        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+>>>>>>> 821ad8e3403df0274503f1568fa817ddb0fbdfa7
+>>>>>>> 329ba18f900950419c16c4e849601e49a8284c83
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.33</version>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 329ba18f900950419c16c4e849601e49a8284c83
             <scope>runtime</scope>
         </dependency>
         <dependency>
@@ -62,11 +118,38 @@
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
             <version>2.3.0</version>
         </dependency>
+<<<<<<< HEAD
+=======
+=======
+        </dependency>
+
+        <!-- Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- Test Dependencies -->
+>>>>>>> 821ad8e3403df0274503f1568fa817ddb0fbdfa7
+>>>>>>> 329ba18f900950419c16c4e849601e49a8284c83
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+        <!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.12.6</version>
+        </dependency>
+>>>>>>> 821ad8e3403df0274503f1568fa817ddb0fbdfa7
+>>>>>>> 329ba18f900950419c16c4e849601e49a8284c83
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
@@ -79,6 +162,20 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+>>>>>>> 821ad8e3403df0274503f1568fa817ddb0fbdfa7
+>>>>>>> 329ba18f900950419c16c4e849601e49a8284c83
             </plugin>
         </plugins>
     </build>

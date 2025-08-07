@@ -1,9 +1,21 @@
+<<<<<<< HEAD
 'use client'
 
 // Inspired by react-hot-toast library
 import * as React from 'react'
 
 import type { ToastActionElement, ToastProps } from '@/components/ui/toast'
+=======
+"use client"
+
+// Inspired by react-hot-toast library
+import * as React from "react"
+
+import type {
+  ToastActionElement,
+  ToastProps,
+} from "@/components/ui/toast"
+>>>>>>> 329ba18f900950419c16c4e849601e49a8284c83
 
 const TOAST_LIMIT = 1
 const TOAST_REMOVE_DELAY = 1000000
@@ -15,12 +27,20 @@ type ToasterToast = ToastProps & {
   action?: ToastActionElement
 }
 
+<<<<<<< HEAD
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const actionTypes = {
   ADD_TOAST: 'ADD_TOAST',
   UPDATE_TOAST: 'UPDATE_TOAST',
   DISMISS_TOAST: 'DISMISS_TOAST',
   REMOVE_TOAST: 'REMOVE_TOAST',
+=======
+const actionTypes = {
+  ADD_TOAST: "ADD_TOAST",
+  UPDATE_TOAST: "UPDATE_TOAST",
+  DISMISS_TOAST: "DISMISS_TOAST",
+  REMOVE_TOAST: "REMOVE_TOAST",
+>>>>>>> 329ba18f900950419c16c4e849601e49a8284c83
 } as const
 
 let count = 0
@@ -34,6 +54,7 @@ type ActionType = typeof actionTypes
 
 type Action =
   | {
+<<<<<<< HEAD
       type: ActionType['ADD_TOAST']
       toast: ToasterToast
     }
@@ -48,6 +69,22 @@ type Action =
   | {
       type: ActionType['REMOVE_TOAST']
       toastId?: ToasterToast['id']
+=======
+      type: ActionType["ADD_TOAST"]
+      toast: ToasterToast
+    }
+  | {
+      type: ActionType["UPDATE_TOAST"]
+      toast: Partial<ToasterToast>
+    }
+  | {
+      type: ActionType["DISMISS_TOAST"]
+      toastId?: ToasterToast["id"]
+    }
+  | {
+      type: ActionType["REMOVE_TOAST"]
+      toastId?: ToasterToast["id"]
+>>>>>>> 329ba18f900950419c16c4e849601e49a8284c83
     }
 
 interface State {
@@ -64,7 +101,11 @@ const addToRemoveQueue = (toastId: string) => {
   const timeout = setTimeout(() => {
     toastTimeouts.delete(toastId)
     dispatch({
+<<<<<<< HEAD
       type: 'REMOVE_TOAST',
+=======
+      type: "REMOVE_TOAST",
+>>>>>>> 329ba18f900950419c16c4e849601e49a8284c83
       toastId: toastId,
     })
   }, TOAST_REMOVE_DELAY)
@@ -74,13 +115,21 @@ const addToRemoveQueue = (toastId: string) => {
 
 export const reducer = (state: State, action: Action): State => {
   switch (action.type) {
+<<<<<<< HEAD
     case 'ADD_TOAST':
+=======
+    case "ADD_TOAST":
+>>>>>>> 329ba18f900950419c16c4e849601e49a8284c83
       return {
         ...state,
         toasts: [action.toast, ...state.toasts].slice(0, TOAST_LIMIT),
       }
 
+<<<<<<< HEAD
     case 'UPDATE_TOAST':
+=======
+    case "UPDATE_TOAST":
+>>>>>>> 329ba18f900950419c16c4e849601e49a8284c83
       return {
         ...state,
         toasts: state.toasts.map((t) =>
@@ -88,7 +137,11 @@ export const reducer = (state: State, action: Action): State => {
         ),
       }
 
+<<<<<<< HEAD
     case 'DISMISS_TOAST': {
+=======
+    case "DISMISS_TOAST": {
+>>>>>>> 329ba18f900950419c16c4e849601e49a8284c83
       const { toastId } = action
 
       // ! Side effects ! - This could be extracted into a dismissToast() action,
@@ -113,7 +166,11 @@ export const reducer = (state: State, action: Action): State => {
         ),
       }
     }
+<<<<<<< HEAD
     case 'REMOVE_TOAST':
+=======
+    case "REMOVE_TOAST":
+>>>>>>> 329ba18f900950419c16c4e849601e49a8284c83
       if (action.toastId === undefined) {
         return {
           ...state,
@@ -138,13 +195,18 @@ function dispatch(action: Action) {
   })
 }
 
+<<<<<<< HEAD
 type Toast = Omit<ToasterToast, 'id'>
+=======
+type Toast = Omit<ToasterToast, "id">
+>>>>>>> 329ba18f900950419c16c4e849601e49a8284c83
 
 function toast({ ...props }: Toast) {
   const id = genId()
 
   const update = (props: ToasterToast) =>
     dispatch({
+<<<<<<< HEAD
       type: 'UPDATE_TOAST',
       toast: { ...props, id },
     })
@@ -152,6 +214,15 @@ function toast({ ...props }: Toast) {
 
   dispatch({
     type: 'ADD_TOAST',
+=======
+      type: "UPDATE_TOAST",
+      toast: { ...props, id },
+    })
+  const dismiss = () => dispatch({ type: "DISMISS_TOAST", toastId: id })
+
+  dispatch({
+    type: "ADD_TOAST",
+>>>>>>> 329ba18f900950419c16c4e849601e49a8284c83
     toast: {
       ...props,
       id,
@@ -185,7 +256,11 @@ function useToast() {
   return {
     ...state,
     toast,
+<<<<<<< HEAD
     dismiss: (toastId?: string) => dispatch({ type: 'DISMISS_TOAST', toastId }),
+=======
+    dismiss: (toastId?: string) => dispatch({ type: "DISMISS_TOAST", toastId }),
+>>>>>>> 329ba18f900950419c16c4e849601e49a8284c83
   }
 }
 

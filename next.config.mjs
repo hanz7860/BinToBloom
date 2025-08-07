@@ -1,3 +1,14 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+// next.config.mjs
+
+import path from 'path'
+import { fileURLToPath } from 'url'
+
+>>>>>>> 821ad8e3403df0274503f1568fa817ddb0fbdfa7
+>>>>>>> 329ba18f900950419c16c4e849601e49a8284c83
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   eslint: {
@@ -9,6 +20,22 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+  webpack(config) {
+    const __dirname = path.dirname(fileURLToPath(import.meta.url))
+
+    // Force all packages to resolve the same 'three' instance
+    config.resolve.alias['three'] = path.resolve(
+      __dirname,
+      'node_modules/three'
+    )
+    return config
+  },
+>>>>>>> 821ad8e3403df0274503f1568fa817ddb0fbdfa7
+>>>>>>> 329ba18f900950419c16c4e849601e49a8284c83
 }
 
 export default nextConfig
